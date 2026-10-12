@@ -66,6 +66,10 @@ ov::Output<ov::Node> process_view_input(const NodeContext & context, int input_i
 
 ov::Output<ov::Node> process_view_input_new(const NodeContext & context, int input_index);
 
+// rt_info key on the Reshape that restores the heads after a grouped-query MUL_MAT (mulmat): the number of A rows
+// stacked per B matrix
+constexpr const char * GGML_OV_GROUPED_ROWS = "ggml_ov_grouped_rows";
+
 namespace op {
 template <typename T> OutputVector translate_1to1_match_2_inputs(const NodeContext & context) {
     num_inputs_check(context, 2, 2);

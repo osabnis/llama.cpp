@@ -337,6 +337,10 @@ public:
 
     const ggml_tensor * get_tensor_used_op(const ggml_tensor * tensor) const;
 
+    // True if each row of the KV cache holds one token. With `-fa off`, llama.cpp keeps the V cache transposed
+    // and writes it one element per row, so its first rows do not hold the first tokens.
+    bool is_kvcache_token_rows(const ggml_tensor * cache) const;
+
     const ggml_tensor * get_tensor_from_name(const std::string & name) const;
 
     void clear_model_weights() { m_model_weights.clear(); }
